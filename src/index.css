@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+:root {
+  background-color: white;
+  color: black;
+  scroll-behavior: smooth;
+}
