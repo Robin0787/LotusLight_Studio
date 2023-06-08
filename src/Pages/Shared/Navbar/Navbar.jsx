@@ -6,6 +6,8 @@ import { RxDashboard } from 'react-icons/rx';
 import { VscHome } from 'react-icons/vsc';
 import { Link, NavLink } from 'react-router-dom';
 import logo from "../../../assets/logo.png";
+import profile from "../../../assets/profile.png";
+
 const Navbar = () => {
     const navItems = <>
         <NavLink to={'/'}
@@ -58,13 +60,13 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1 gap-8">
+                    <ul className="menu menu-horizontal px-1 gap-10">
                         {navItems}
                     </ul>
                 </div>
                 <div className="navbar-end">
                     {
-                        true ?
+                        !true ?
                             <div className='flex justify-center items-center gap-8'>
                                 <NavLink to={'/dashboard'}
                                     className={({ isActive }) => isActive ?
@@ -76,7 +78,7 @@ const Navbar = () => {
                                 <div className="dropdown dropdown-end">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                            <img src={profile} />
                                         </div>
                                     </label>
                                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-black rounded-box w-52">
@@ -91,7 +93,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                             :
-                            <Link className='bg-blue-600 text-white text-sm md:text-md px-3 py-1 md:px-6 md:py-2  rounded-md'>Login</Link>
+                            <Link to={'/signUp'} className='bg-blue-600 text-white text-sm md:text-md px-3 py-1 md:px-6 md:py-2  rounded-md'>Sign Up</Link>
                     }
                 </div>
             </div>
