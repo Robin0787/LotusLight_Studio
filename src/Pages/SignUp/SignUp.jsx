@@ -1,24 +1,93 @@
+import { updateProfile } from "firebase/auth";
 import Lottie from "lottie-react";
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ImSpinner9 } from "react-icons/im";
 import { Link } from 'react-router-dom';
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import StoreUser from "../../Hooks/StoreUser";
+import UploadImage from "../../Hooks/UploadImage";
+import { authContext } from "../../Provider/AuthProvider";
 import animation from "../../assets/signUpAnimation.json";
 
 const SignUp = () => {
     const [showEyeIcon, setShowEyeIcon] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [passError, setPassError] = useState('');
+    const [isPassOk, setIsPassOk] = useState(false);
     const [showPass, setShowPass] = useState(false);
     const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
-    const { register, handleSubmit, formState: { errors }, reset, setError } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, setError, clearErrors } = useForm();
+    const { createUser } = useContext(authContext);
+
+
+    const handleSignUp = (data) => {
+        setProcessing(true);
+        if (isPassOk) {
+            if (data.password === data.confirmPassword) {
+                UploadImage(data.image[0])
+                    .then(res => {
+                        const imageURL = res?.display_url;
+                        createUser(data.email, data.password)
+                            .then(res => {
+                                    toast.success('SignUp Successful');
+                                    reset();
+                                    setProcessing(false);
+                                    StoreUser(res.user?.email, {...data, image: imageURL, role: 'user'});
+                                    updateProfile(res.user, { displayName: `${data.firstName} ${data.lastName}`, photoURL: imageURL });
+                            }).catch(err => {toast.error('Something Wrong!'); console.log(err.message);setProcessing(false);})
+                    })
+            }
+            else {
+                toast.error("Password didn't matched");
+                setProcessing(false);
+            }
+        } 
+        else {
+            toast.error("Password is too weak!");
+            setProcessing(false);
+        }
+    }
+    // Changing the name of image input field based on image name;
     const handleImageChange = image => {
         setUploadButtonText(image.name);
     }
-    const handleSignUp = (data) => {
-        console.log(data);
-        console.log(errors);
-        toast.success('Form');
+    // listening password on every change
+    function handlePassChange(e) {
+        const pass = e.target.value;
+        if (!/(?=.*[A-Z])/.test(pass)) {
+            setPassError('Password must contain a uppercase letter');
+            setIsPassOk(false);
+        }
+        else if (!/(?=.*[0-9].*[0-9])/.test(pass)) {
+            setPassError('Password must contain at least two numbers');
+            setIsPassOk(false);
+        }
+        else if (!/(?=.*[!@#$%^&*+=])/.test(pass)) {
+            setPassError('Password must contain a special character');
+            setIsPassOk(false);
+        }
+        else if (pass.length < 6) {
+            setPassError('Password must contain minimum six characters');
+            setIsPassOk(false);
+        }
+        else {
+            setIsPassOk(true);
+            clearErrors('password')
+            setPassError('');
+        }
+        validatePass(pass);
+    }
+    // Validating the password that user have written
+    function validatePass(pass) {
+        if (pass.length > 0) {
+            setShowEyeIcon(true);
+        } else {
+            setShowEyeIcon(false);
+            setPassError('');
+        }
     }
     return (
         <section className='flex justify-center items-center min-h-screen '>
@@ -38,7 +107,7 @@ const SignUp = () => {
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('firstName', { required: true })}
                                         placeholder='First Name' autoComplete="off" />
-                                        {errors.firstName && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
+                                    {errors.firstName && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                                 <div className='w-full md:w-1/2 space-y-1 relative'>
                                     <label htmlFor="lastName">Last Name</label><br />
@@ -46,7 +115,7 @@ const SignUp = () => {
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('lastName', { required: true })}
                                         placeholder='Last Name' autoComplete="off" />
-                                         {errors.lastName && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
+                                    {errors.lastName && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                             </div>
                             {/* Emails input field */}
@@ -56,7 +125,7 @@ const SignUp = () => {
                                     className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                     {...register('email', { required: true })}
                                     placeholder='Your Email' autoComplete="off" />
-                                     {errors.email && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
+                                {errors.email && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                             </div>
                             {/* Passwords input field */}
                             <div className='space-y-1 relative'>
@@ -65,14 +134,18 @@ const SignUp = () => {
                                     <input type={showPass ? 'text' : "password"}
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('password', { required: true })}
-                                        placeholder='Password' autoComplete="off" />
+                                        placeholder='Password' autoComplete="off"
+                                        onChange={handlePassChange} />
                                     {
-                                        showPass ?
+                                        showEyeIcon ? (showPass ?
                                             <FaEye onClick={() => { setShowPass(!showPass) }} size={14} className="text-blue-400 absolute right-4 top-3 cursor-pointer" />
                                             :
-                                            <FaEyeSlash onClick={() => { setShowPass(!showPass) }} size={14} className="text-blue-400 absolute right-4 top-3 cursor-pointer" />
+                                            <FaEyeSlash onClick={() => { setShowPass(!showPass) }} size={14} className="text-blue-400 absolute right-4 top-3 cursor-pointer" />)
+                                            :
+                                            ''
                                     }
-                                     {errors.password && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
+                                    {passError ? "" : (errors.password && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>)}
+                                    {passError && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">{passError}</p>}
                                 </div>
                             </div>
                             {/* Confirm Passwords input field */}
@@ -82,7 +155,7 @@ const SignUp = () => {
                                     className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                     {...register('confirmPassword', { required: true })}
                                     placeholder='Confirm Password' autoComplete="off" />
-                                     {errors.confirmPassword && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
+                                {(errors.confirmPassword && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>)}
                             </div>
                             {/* Image & Address input field */}
                             <div className="flex items-center gap-5">
@@ -92,16 +165,15 @@ const SignUp = () => {
                                         <label>
                                             <input
                                                 onChange={(e) => { handleImageChange(e.target.files[0]) }}
-                                                className='text-sm cursor-pointer w-36 hidden'
+                                                className='p-2 py-[6px] text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                                 type='file'
-                                                {...register('image', { required: true })}
+                                                name='image'
+                                                id='image'
                                                 accept='image/*'
+                                                {...register('image', { required: true })}
                                             />
-                                            <div className='text-white bg-blue-500 hover:bg-blue-700 tracking-[2px] border text-sm rounded-md font-thin w-full cursor-pointer py-2 duration-300'>
-                                                {uploadButtonText}
-                                            </div>
                                         </label>
-                                        {errors.image && <p className="text-blue-400 text-xs text-left absolute top-[38px]">This field is required!</p>}
+                                        {errors.image && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                     </div>
                                 </div>
                                 <div className='space-y-1 w-1/2 relative'>
@@ -109,7 +181,7 @@ const SignUp = () => {
                                     <input type="text"
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('address', { required: true })} placeholder='Address' autoComplete="off" />
-                                         {errors.address && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
+                                    {errors.address && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                             </div>
                             {/* Phone Number & Gender input field */}
@@ -120,7 +192,7 @@ const SignUp = () => {
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('phone', { required: true })}
                                         placeholder='Phone' autoComplete="off" />
-                                         {errors.phone && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
+                                    {errors.phone && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                                 <div className='w-full md:w-1/2 space-y-1 relative'>
                                     <label htmlFor="lastName">Gender</label><br />
@@ -138,7 +210,10 @@ const SignUp = () => {
                             <div className="space-y-2">
                                 <button
                                     type="submit"
-                                    className='w-full py-3 bg-gradient-to-tr from-blue-500 to-blue-900 text-white  hover:from-blue-600 hover:to-blue-900 duration-300 rounded-md'>Sign Up
+                                    className='w-full py-3 flex justify-center bg-gradient-to-tr from-blue-500 to-blue-900 text-white  hover:from-blue-600 hover:to-blue-900 duration-300 rounded-md disabled:cursor-not-allowed'
+                                    disabled={processing}
+                                    >
+                                        {processing ? <ImSpinner9 size={24} className="text-white animate-spin duration-300 text-center"/> : 'Sign Up'}
                                 </button>
                             </div>
                         </article>

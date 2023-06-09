@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { HiOutlineDatabase } from 'react-icons/hi';
 import { LuUserCheck } from 'react-icons/lu';
 import { RxDashboard } from 'react-icons/rx';
 import { VscHome } from 'react-icons/vsc';
 import { Link, NavLink } from 'react-router-dom';
+import { authContext } from '../../../Provider/AuthProvider';
 import logo from "../../../assets/logo.png";
 import profile from "../../../assets/profile.png";
 
 const Navbar = () => {
+    const {user, logOutUser} = useContext(authContext);
     const navItems = <>
         <NavLink to={'/'}
             className={({ isActive }) => isActive ?
@@ -66,7 +68,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        !true ?
+                        user ?
                             <div className='flex justify-center items-center gap-8'>
                                 <NavLink to={'/dashboard'}
                                     className={({ isActive }) => isActive ?
@@ -78,22 +80,22 @@ const Navbar = () => {
                                 <div className="dropdown dropdown-end">
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                            <img src={profile} />
+                                            <img src={user.photoURL || profile} />
                                         </div>
                                     </label>
-                                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-black rounded-box w-52">
+                                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-black rounded-box w-52 z-10">
                                         <li>
                                             <a className="justify-between">
                                                 <span>Profile</span>
                                                 <FaRegUserCircle size={20} />
                                             </a>
                                         </li>
-                                        <li><a>Logout</a></li>
+                                        <li onClick={() => {logOutUser()}}><a>Log Out</a></li>
                                     </ul>
                                 </div>
                             </div>
                             :
-                            <Link to={'/signUp'} className='bg-blue-600 text-white text-sm md:text-md px-3 py-1 md:px-6 md:py-2  rounded-md'>Sign Up</Link>
+                            <Link to={'/login'} className='bg-blue-600 text-white text-sm md:text-md px-3 py-1 md:px-6 md:py-2  rounded-md'>Login</Link>
                     }
                 </div>
             </div>

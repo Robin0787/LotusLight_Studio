@@ -5,7 +5,6 @@ import { authContext } from '../../Provider/AuthProvider';
 
 const SocialLogin = () => {
     const {user, loading, authenticationWithGoogle, authenticationWithGithub} = useContext(authContext);
-    console.log(user);
     function continueWithGoogle () {
         authenticationWithGoogle()
         .then(res => {
