@@ -5,6 +5,7 @@ export const authContext = createContext(null);
 
 const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(false);
+    const [processing, setProcessing] = useState(false);
     const [user, setUser] = useState(null);
     const auth = getAuth(app);
     const googleProvider = new GoogleAuthProvider();
@@ -19,7 +20,6 @@ const AuthProvider = ({children}) => {
     }
 
     const logOutUser = () => {
-        console.log('Logout');
         return signOut(auth);
     }
 
@@ -40,7 +40,7 @@ const AuthProvider = ({children}) => {
     }, []);
 
     const authInfo = {
-        user, loading, setLoading, createUser, logInUser, authenticationWithGoogle, authenticationWithGithub, logOutUser
+        user, loading, setLoading, createUser, logInUser, authenticationWithGoogle, authenticationWithGithub, logOutUser, processing, setProcessing
     }
 
     return (

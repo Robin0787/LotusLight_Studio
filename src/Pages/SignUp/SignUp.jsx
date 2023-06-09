@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import StoreUser from "../../Hooks/StoreUser";
 import UploadImage from "../../Hooks/UploadImage";
@@ -14,14 +14,15 @@ import animation from "../../assets/signUpAnimation.json";
 
 const SignUp = () => {
     const [showEyeIcon, setShowEyeIcon] = useState(false);
-    const [processing, setProcessing] = useState(false);
     const [passError, setPassError] = useState('');
     const [isPassOk, setIsPassOk] = useState(false);
     const [showPass, setShowPass] = useState(false);
     const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
     const { register, handleSubmit, formState: { errors }, reset, setError, clearErrors } = useForm();
-    const { createUser } = useContext(authContext);
-
+    const { createUser, processing, setProcessing } = useContext(authContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSignUp = (data) => {
         setProcessing(true);
@@ -32,19 +33,28 @@ const SignUp = () => {
                         const imageURL = res?.display_url;
                         createUser(data.email, data.password)
                             .then(res => {
-                                    toast.success('SignUp Successful');
-                                    reset();
-                                    setProcessing(false);
-                                    StoreUser(res.user?.email, {...data, image: imageURL, role: 'user'});
-                                    updateProfile(res.user, { displayName: `${data.firstName} ${data.lastName}`, photoURL: imageURL });
-                            }).catch(err => {toast.error('Something Wrong!'); console.log(err.message);setProcessing(false);})
+                                toast.success('SignUp Successful');
+                                setProcessing(false);
+                                reset();
+                                navigate(from, {replace: true});
+                                // Storing the users information to database
+                                const userDetails = {
+                                    ...data,
+                                    displayName: `${data.firstName} ${data.lastName}`,
+                                    photoURL: imageURL,
+                                    image: imageURL
+                                }
+                                StoreUser(res.user?.email, {...userDetails});
+                                // Updating users profile details on firebase
+                                updateProfile(res.user, { displayName: `${data.firstName} ${data.lastName}`, photoURL: imageURL });
+                            }).catch(err => { toast.error('Something Wrong!'); console.log(err.message); setProcessing(false); })
                     })
             }
             else {
                 toast.error("Password didn't matched");
                 setProcessing(false);
             }
-        } 
+        }
         else {
             toast.error("Password is too weak!");
             setProcessing(false);
@@ -212,8 +222,8 @@ const SignUp = () => {
                                     type="submit"
                                     className='w-full py-3 flex justify-center bg-gradient-to-tr from-blue-500 to-blue-900 text-white  hover:from-blue-600 hover:to-blue-900 duration-300 rounded-md disabled:cursor-not-allowed'
                                     disabled={processing}
-                                    >
-                                        {processing ? <ImSpinner9 size={24} className="text-white animate-spin duration-300 text-center"/> : 'Sign Up'}
+                                >
+                                    {processing ? <ImSpinner9 size={24} className="text-white animate-spin duration-300 text-center" /> : 'Sign Up'}
                                 </button>
                             </div>
                         </article>

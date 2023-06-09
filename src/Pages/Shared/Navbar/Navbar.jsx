@@ -42,7 +42,7 @@ const Navbar = () => {
         </NavLink>
     </>
     return (
-        <section className='shadow-lg px-0 md:px-10'>
+        <section className='px-0 md:px-10'>
             <div className="navbar bg-white ">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -95,7 +95,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                             :
-                            <Link to={'/login'} className='bg-blue-600 text-white text-sm md:text-md px-3 py-1 md:px-6 md:py-2  rounded-md'>Login</Link>
+                            <Link to={'/login'} className='bg-blue-600 text-white text-sm md:text-md px-3 py-1 md:px-6 md:py-2 rounded-full ring-1 ring-white hover:ring-blue-500 hover:bg-white hover:text-blue-500 duration-300'>Login</Link>
                     }
                 </div>
             </div>

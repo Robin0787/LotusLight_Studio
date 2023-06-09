@@ -7,7 +7,7 @@
   font-size: 50px;
   color: #fff;
   font-weight: 500;
-  height: 400px;
+  height: 500px;
   max-height: 100vh;
 }
 
@@ -30,16 +30,16 @@
 }
 
 .number-slide3 {
-  background: rgb(182, 255, 64);
+  background: rgb(255, 38, 255);
   background: linear-gradient(
     128deg,
-    rgba(182, 255, 64, 1) 0%,
-    rgba(63, 255, 71, 1) 100%
+    rgb(230, 34, 248) 0%,
+    rgb(245, 38, 252) 100%
   );
   background: linear-gradient(
     128deg,
-    rgba(189, 255, 83, 1) 0%,
-    rgba(43, 250, 82, 1) 100%
+    rgb(255, 83, 255) 0%,
+    rgb(250, 43, 240) 100%
   );
 }
 
@@ -47,7 +47,7 @@
   background: rgb(64, 255, 242);
   background: linear-gradient(
     128deg,
-    rgba(64, 255, 242, 1) 0%,
+    rgb(49, 248, 235) 0%,
     rgba(63, 188, 255, 1) 100%
   );
 }
