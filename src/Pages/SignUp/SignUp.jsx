@@ -25,38 +25,41 @@ const SignUp = () => {
             <section className='w-full sm:w-[90%] md:w-4/5 lg:w-2/3 mx-auto shadow-lg border p-5 sm:p-10 rounded-lg'>
                 <form onSubmit={handleSubmit(handleSignUp)}>
                     <section className='md:flex items-center gap-5 lg:gap-10 text-gray-800 font-thin'>
-                        <article className='md:w-1/2 space-y-4'>
+                        <article className='md:w-1/2 space-y-5'>
                             {/* animation gif */}
                             <div className='w-full md:hidden'>
                                 <Lottie animationData={animation} loop={true} />
                             </div>
                             {/* First & Last Names input field */}
                             <div className='flex items-center gap-5'>
-                                <div className='w-full md:w-1/2 space-y-1'>
+                                <div className='w-full md:w-1/2 space-y-1 relative'>
                                     <label htmlFor="firstName">First Name</label><br />
                                     <input type="text"
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('firstName', { required: true })}
                                         placeholder='First Name' autoComplete="off" />
+                                        {errors.firstName && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
-                                <div className='w-full md:w-1/2 space-y-1'>
+                                <div className='w-full md:w-1/2 space-y-1 relative'>
                                     <label htmlFor="lastName">Last Name</label><br />
                                     <input type="text"
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('lastName', { required: true })}
                                         placeholder='Last Name' autoComplete="off" />
+                                         {errors.lastName && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                             </div>
                             {/* Emails input field */}
-                            <div className='space-y-1'>
+                            <div className='space-y-1 relative'>
                                 <label htmlFor="email">Email</label><br />
                                 <input type="email"
                                     className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                     {...register('email', { required: true })}
                                     placeholder='Your Email' autoComplete="off" />
+                                     {errors.email && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                             </div>
                             {/* Passwords input field */}
-                            <div className='space-y-1'>
+                            <div className='space-y-1 relative'>
                                 <label htmlFor="password">Password</label><br />
                                 <div className="relative">
                                     <input type={showPass ? 'text' : "password"}
@@ -69,21 +72,23 @@ const SignUp = () => {
                                             :
                                             <FaEyeSlash onClick={() => { setShowPass(!showPass) }} size={14} className="text-blue-400 absolute right-4 top-3 cursor-pointer" />
                                     }
+                                     {errors.password && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                             </div>
                             {/* Confirm Passwords input field */}
-                            <div className='space-y-1'>
+                            <div className='space-y-1 relative'>
                                 <label htmlFor="password">Confirm Password</label><br />
                                 <input type={showPass ? 'text' : "password"}
                                     className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                     {...register('confirmPassword', { required: true })}
                                     placeholder='Confirm Password' autoComplete="off" />
+                                     {errors.confirmPassword && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                             </div>
                             {/* Image & Address input field */}
                             <div className="flex items-center gap-5">
                                 <div className='bg-white space-y-1  m-auto rounded-lg w-1/2'>
                                     <label htmlFor="Image">Image</label><br />
-                                    <div className='flex flex-col w-full mx-auto text-center'>
+                                    <div className='flex flex-col w-full mx-auto text-center relative'>
                                         <label>
                                             <input
                                                 onChange={(e) => { handleImageChange(e.target.files[0]) }}
@@ -96,25 +101,28 @@ const SignUp = () => {
                                                 {uploadButtonText}
                                             </div>
                                         </label>
+                                        {errors.image && <p className="text-blue-400 text-xs text-left absolute top-[38px]">This field is required!</p>}
                                     </div>
                                 </div>
-                                <div className='space-y-1 w-1/2'>
+                                <div className='space-y-1 w-1/2 relative'>
                                     <label htmlFor="address">Address</label><br />
                                     <input type="text"
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('address', { required: true })} placeholder='Address' autoComplete="off" />
+                                         {errors.address && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                             </div>
                             {/* Phone Number & Gender input field */}
                             <div className='flex items-center gap-5'>
-                                <div className='w-full md:w-1/2 space-y-1'>
+                                <div className='w-full md:w-1/2 space-y-1 relative'>
                                     <label htmlFor="phone">Phone</label><br />
                                     <input type="number"
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
                                         {...register('phone', { required: true })}
                                         placeholder='Phone' autoComplete="off" />
+                                         {errors.phone && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
-                                <div className='w-full md:w-1/2 space-y-1'>
+                                <div className='w-full md:w-1/2 space-y-1 relative'>
                                     <label htmlFor="lastName">Gender</label><br />
                                     <select name="gender"
                                         className='p-2 text-sm focus:px-5  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300' {...register('gender', { required: true })}>
@@ -123,6 +131,7 @@ const SignUp = () => {
                                         <option value="female">Female</option>
                                         <option value="third">Prefer not to say</option>
                                     </select>
+                                    {errors.gender && <p className="text-blue-400 text-xs text-left absolute -bottom-[18px]">This field is required!</p>}
                                 </div>
                             </div>
                             {/* Sign Up Button */}
