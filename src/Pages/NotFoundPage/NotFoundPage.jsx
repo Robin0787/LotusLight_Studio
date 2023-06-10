@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import notFoundGif from "../assets/404.gif";
+import notFoundGif from "../../assets/404.gif";
 
 const NotFoundPage = () => {
     const navigate = useNavigate();
