@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Pages/Home/Home";
+import Instructors from "../Pages/Instructors/Instructors";
 import Login from "../Pages/Login/Login";
 import Main from "../Pages/Main/Main";
 import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
@@ -16,7 +17,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/instructors',
-                element: <p className="text-3xl text-center py-10">Instructors</p>
+                element: <Instructors />
             },
             {
                 path: '/classes',

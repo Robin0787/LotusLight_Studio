@@ -41,7 +41,7 @@ const Navbar = () => {
         </NavLink>
     </>
     return (
-        <section className='px-0 md:px-10'>
+        <section className='px-0 md:px-10 shadow-lg'>
             <div className="navbar bg-white ">
                 <div className="navbar-start">
                     <div className="dropdown">

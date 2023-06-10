@@ -4,7 +4,7 @@ import logo from "../../../assets/logo.png";
 const Footer = () => {
     return (
         <section className='bg-black text-gray-200 py-24 mt-20 lg:mt-28 mx-auto'>
-            <article className='w-[90%] mx-auto grid grid-cols-[2fr_1fr] md:grid-cols-[3fr_1fr_1fr] 
+            <article className='w-[90%] mx-auto grid grid-cols-2 md:grid-cols-[3fr_1fr_1fr] 
             lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-12 '>
                 <div className='space-y-5'>
                     <div className='md:flex items-center gap-5'>
