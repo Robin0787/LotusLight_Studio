@@ -38,7 +38,7 @@ const Slider = () => {
       <div className="navigation-wrapper relative text-white">
         <div ref={sliderRef} className="keen-slider">
           {/* First Slider Item */}
-          <div className="keen-slider__slide number-slide1">
+          <div className="keen-slider__slide number-slide1 h-[500px]">
             <div className='h-full flex flex-col sm:flex-row justify-center items-center'>
               <img src={img1} className='h-1/2 sm:h-full w-full object-cover inset-1 sm:w-1/2 lg:w-2/5 sm:shadow-2xl' />
               <div className='text-center md:space-y-3 md:w-1/2 p-4'>
@@ -49,13 +49,13 @@ const Slider = () => {
                 <button
                   className='text-sm md:text-base  rounded-full px-5 py-2 md:px-10 md:py-3 font-medium border-2
                   hover:bg-white hover:text-blue-700 duration-300'>
-                  Explore Out Courses
+                  Explore Our Courses
                 </button>
               </div>
             </div>
           </div>
           {/* Second Slider Item */}
-          <div className="keen-slider__slide number-slide2">
+          <div className="keen-slider__slide number-slide2 h-[500px]">
             <div className='h-full flex flex-col sm:flex-row justify-center items-center'>
               <img src={img2} className='h-1/2 sm:p-3 sm:h-full w-full object-cover inset-1 sm:w-1/2 lg:w-2/5 sm:shadow-2xl' />
               <div className='text-center md:space-y-3 md:w-1/2 p-4'>
@@ -66,13 +66,13 @@ const Slider = () => {
                 <button
                   className='text-sm md:text-base  rounded-full px-5 py-2 md:px-10 md:py-3 font-medium border-2
                   hover:bg-white hover:text-orange-600 duration-300'>
-                  Explore Out Courses
+                  Explore Our Courses
                 </button>
               </div>
             </div>
           </div>
           {/* Third Slider Item */}
-          <div className="keen-slider__slide number-slide3">
+          <div className="keen-slider__slide number-slide3 h-[500px]">
             <div className='h-full flex flex-col sm:flex-row justify-center items-center'>
               <img src={img3} className='h-1/2 sm:h-full w-full object-cover inset-1 sm:w-1/2 lg:w-2/5 sm:shadow-2xl' />
               <div className='text-center md:space-y-3 md:w-1/2 p-4'>
@@ -83,13 +83,13 @@ const Slider = () => {
                 <button
                   className='text-sm md:text-base  rounded-full px-5 py-2 md:px-10 md:py-3 font-medium border-2
                   hover:bg-white hover:text-purple-900 duration-300'>
-                  Explore Out Courses
+                  Explore Our Courses
                 </button>
               </div>
             </div>
           </div>
           {/* Fourth Slider */}
-          <div className="keen-slider__slide number-slide4">
+          <div className="keen-slider__slide number-slide4 h-[500px]">
             <div className='h-full flex flex-col sm:flex-row-reverse justify-center items-center'>
               <img src={img4} className='h-1/2 sm:h-full w-full object-cover inset-1 sm:w-1/2 lg:w-2/5 sm:shadow-2xl' />
               <div className='text-center md:space-y-3 md:w-1/2 p-4'>
@@ -100,13 +100,13 @@ const Slider = () => {
                 <button
                   className='text-sm md:text-base  rounded-full px-5 py-2 md:px-10 md:py-3 font-medium border-2
                   hover:bg-white hover:text-teal-400 duration-300'>
-                  Explore Out Courses
+                  Explore Our Courses
                 </button>
               </div>
             </div>
           </div>
           {/* Fifth Slider */}
-          <div className="keen-slider__slide number-slide5">
+          <div className="keen-slider__slide number-slide5 h-[500px]">
             <div className='h-full flex flex-col sm:flex-row-reverse justify-center items-center'>
               <img src={img5} className='h-1/2 sm:h-full w-full object-cover inset-1 sm:w-1/2 lg:w-2/5 sm:shadow-2xl' />
               <div className='text-center md:space-y-3 md:w-1/2 p-4'>
@@ -116,7 +116,7 @@ const Slider = () => {
                 <button
                   className='text-sm md:text-base  rounded-full px-5 py-2 md:px-10 md:py-3 font-medium border-2
                   hover:bg-white hover:text-pink-700 duration-300'>
-                  Explore Out Courses
+                  Explore Our Courses
                 </button>
               </div>
             </div>
