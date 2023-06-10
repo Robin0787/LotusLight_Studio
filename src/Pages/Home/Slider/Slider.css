@@ -169,6 +169,7 @@
   .scene {
     width: 200px;
     height: 200px;
+    perspective: 400px;
   }
   .carousel__cell {
     width: 200px;

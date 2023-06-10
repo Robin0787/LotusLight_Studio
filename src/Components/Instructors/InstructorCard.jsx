@@ -3,13 +3,15 @@ import React from 'react';
 const InstructorCard = ({ item }) => {
     const { displayName, image, email, classes = 0 } = item;
     const colors = ['#ff3811', '#40afff', '#ff4b40', '#ff26ff', '#40fff2'];
+
     function getColor() {
         const index = Math.floor(Math.random() * colors.length);
         return colors[index];
     }
+    const color = getColor();
     return (
-        <article className='rounded-lg shadow-xl p-4 flex flex-col justify-between gap-2'>
-            <img src={image} alt="" className={` object-cover rounded-lg h-2/3`} style={{ backgroundColor: getColor() }} />
+        <article className='rounded-lg shadow-xl shadow-blue-200 p-4 flex flex-col justify-between gap-2'>
+            <img src={image} alt="" className={` object-cover rounded-lg h-2/3`} style={{ backgroundColor: color}} />
             <div>
                 <h2 className='text-xl tracking-[2px]'>{displayName}</h2>
                 <p className='text-md font-thin tracking-[1px] text-gray-600'>{email}</p>

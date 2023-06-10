@@ -1,11 +1,13 @@
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import React, { createContext, useEffect, useState } from 'react';
+import { GetUserRole } from "../Hooks/GetUserRole";
 import app from '../firebase/firebase.init';
 export const authContext = createContext(null);
 
 const AuthProvider = ({children}) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [processing, setProcessing] = useState(false);
+    const [userRole, setUserRole] = useState('');
     const [user, setUser] = useState(null);
     const auth = getAuth(app);
     const googleProvider = new GoogleAuthProvider();
@@ -29,18 +31,25 @@ const AuthProvider = ({children}) => {
     const authenticationWithGithub = () => {
         return signInWithPopup(auth, githubProvider);
     }
+    useEffect(() => {
+        if(user){
+            GetUserRole(user.email)
+            .then(data => {
+                setUserRole(data);
+            })
+        }
+    }, [user]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
                 setUser(currentUser);
-                console.log(currentUser);
                 setLoading(false);
         })
         return () => unsubscribe();
     }, []);
 
     const authInfo = {
-        user, loading, setLoading, createUser, logInUser, authenticationWithGoogle, authenticationWithGithub, logOutUser, processing, setProcessing
+        user, loading, setLoading, createUser, logInUser, authenticationWithGoogle, authenticationWithGithub, logOutUser, processing, setProcessing, userRole
     }
 
     return (
