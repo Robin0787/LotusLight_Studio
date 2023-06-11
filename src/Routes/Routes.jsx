@@ -2,12 +2,17 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Main from "../Layouts/Main/Main";
 import DashboardHome from "../Pages/Dashboard/Home/DashboardHome";
+import AddClass from "../Pages/Dashboard/Instructor/AddClass/AddClass";
+import MyClasses from "../Pages/Dashboard/Instructor/MyClasses/MyClasses";
 import Home from "../Pages/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 import Login from "../Pages/Login/Login";
 import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
 import SignUp from "../Pages/SignUp/SignUp";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
+import UserRoute from "./UserRoute";
 
 const routes = createBrowserRouter([
     {
@@ -20,7 +25,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/instructors',
-                element: <Instructors/>
+                element: <Instructors />
             },
             {
                 path: '/classes',
@@ -46,31 +51,31 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/dashboard/manage-classes',
-                element: <p>Manage Classes</p>
+                element: <AdminRoute><p>Manage Classes</p></AdminRoute>
             },
             {
                 path: '/dashboard/manage-users',
-                element: <p>Manage Users</p>
+                element: <AdminRoute><p>Manage Users</p></AdminRoute>
             },
             {
                 path: '/dashboard/add-class',
-                element: <p>Add a Class</p>
+                element: <InstructorRoute><AddClass /></InstructorRoute>
             },
             {
                 path: '/dashboard/my-classes',
-                element: <p>My Classes</p>
+                element: <InstructorRoute><MyClasses /></InstructorRoute>
             },
             {
                 path: '/dashboard/selected-classes',
-                element: <p>Selected Classes</p>
+                element: <UserRoute><p>Selected Classes</p></UserRoute>
             },
             {
                 path: '/dashboard/enrolled-classes',
-                element: <p>Enrolled Classes</p>
+                element: <UserRoute><p>Enrolled Classes</p></UserRoute>
             },
             {
                 path: '/dashboard/payment',
-                element: <p>Payment</p>
+                element: <UserRoute><p>Payment</p></UserRoute>
             },
         ]
     },

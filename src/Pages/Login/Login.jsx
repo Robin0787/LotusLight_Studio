@@ -22,7 +22,6 @@ const Login = () => {
         setProcessing(true);
         logInUser(data.email, data.password)
         .then(res => {
-            console.log(res.user);
             setProcessing(false);
             reset();
             navigate(from, {replace: true});

@@ -9,6 +9,7 @@ const AuthProvider = ({children}) => {
     const [processing, setProcessing] = useState(false);
     const [userRole, setUserRole] = useState('');
     const [user, setUser] = useState(null);
+    const [userRoleLoading, setUserRoleLoading] = useState(true);
     const auth = getAuth(app);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
@@ -36,6 +37,7 @@ const AuthProvider = ({children}) => {
             GetUserRole(user.email)
             .then(data => {
                 setUserRole(data);
+                setUserRoleLoading(false);
             })
         }
     }, [user]);
@@ -49,7 +51,7 @@ const AuthProvider = ({children}) => {
     }, []);
 
     const authInfo = {
-        user, loading, setLoading, createUser, logInUser, authenticationWithGoogle, authenticationWithGithub, logOutUser, processing, setProcessing, userRole
+        user, loading, setLoading, createUser, logInUser, authenticationWithGoogle, authenticationWithGithub, logOutUser, processing, setProcessing, userRole, userRoleLoading
     }
 
     return (
