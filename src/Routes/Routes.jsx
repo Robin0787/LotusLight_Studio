@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Main from "../Layouts/Main/Main";
+import Classes from "../Pages/Classes/Classes";
 import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import DashboardHome from "../Pages/Dashboard/Home/DashboardHome";
@@ -32,7 +33,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/classes',
-                element: <p className="text-3xl text-center py-10">Classes</p>
+                element: <Classes />
             }
         ]
     },

@@ -7,16 +7,16 @@ import DeleteInstructorClass from '../../../../../Hooks/DeleteInstructorClass';
 import DeleteClass from '../DeleteClass/DeleteClass';
 
 const SingleClass = ({ item, refetch }) => {
-    const { className, image, price, seats, status, _id } = item;
+    const { className, image, price, seats, status, _id, students = 0 } = item;
     const [openModal, setOpenModal] = useState(false);
     function modalHandler(id) {
         DeleteInstructorClass(id)
-        .then(data => {
-            if(data.deletedCount > 0){
-                toast.success('Class Deleted');
-                refetch();
-            }
-        })
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success('Class Deleted');
+                    refetch();
+                }
+            })
         closeModal();
     }
     function closeModal() {
@@ -27,12 +27,20 @@ const SingleClass = ({ item, refetch }) => {
             <img src={image} alt="" className={` object-cover rounded-lg h-2/3`} />
             <div>
                 <h2 className='text-lg tracking-[2px]'>{className}</h2>
+
+            </div>
+            <div className="flex justify-between items-center">
                 <p className='text-sm font-thin tracking-[1px] text-gray-600'>Price: ${price}</p>
                 <p className='text-sm font-thin tracking-[1px] text-gray-600'>Seats: {seats}</p>
             </div>
+            <div>
+                <p className='text-sm font-thin tracking-[1px] text-gray-700'>Students: {students}</p>
+            </div>
             <div className="flex justify-between items-center mt-5">
                 <button
-                    className='rounded-md text-sm px-4 py-1 ring-1 ring-blue-500 text-white  bg-blue-600  flex justify-between items-center gap-2 cursor-default'>
+                    className={`rounded-md text-sm px-4 py-1 text-white
+                    ${status === 'denied' ? 'bg-red-600' : (status === 'pending' ? 'bg-blue-600' : 'bg-green-500')}
+                    flex justify-between items-center gap-2 cursor-default`}>
                     <BiTimeFive size={18} />
                     {status}</button>
                 <div className='flex justify-between items-center gap-3'>
@@ -48,6 +56,17 @@ const SingleClass = ({ item, refetch }) => {
                     </button>
                 </div>
             </div>
+            {
+                status === 'denied'
+                    ?
+                    <div className='flex flex-col'>
+                        <em className='text-sm text-gray-600'>Feedback by Admin</em>
+                        <em className='text-red-500 text-sm'>{item.feedback}</em>
+                    </div>
+                    :
+                    ''
+            }
+
             <DeleteClass closeModal={closeModal} modalHandler={modalHandler} id={_id}
                 openModal={openModal} />
         </article>

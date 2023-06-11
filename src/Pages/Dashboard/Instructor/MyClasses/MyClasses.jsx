@@ -17,11 +17,11 @@ const MyClasses = () => {
     return (
         <section className='p-5 md:p-10'>
             {
-                classes ? (<article className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 lg:gap-10'>
+                classes.length > 0 ? (<article className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 lg:gap-10'>
                     {classes.map(item => <SingleClass key={item._id} item={item} refetch={refetch}/>)}
                 </article>)
                 :
-                <article className='flex justify-center items-center min-h-screen'>
+                <article className='flex justify-center items-center h-[70vh]'>
                     <h2 className="text-4xl font-thin">No Classes Found!</h2>
                 </article>
             }

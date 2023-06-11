@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { BiTimeFive } from 'react-icons/bi';
 import UpdateClassStatus from '../../../../Hooks/UpdateClassStatus';
+import UpdateInstructorClassNumber from '../../../../Hooks/UpdateInstructorClassNumber';
 import ApproveModal from '../ActionModal/ApproveModal';
 import DenyModal from '../ActionModal/DenyModal';
 
@@ -20,6 +21,7 @@ const SingleAdminClass = ({ item, refetch }) => {
             if(data.modifiedCount > 0){
                 toast.success('Class Approved');
                 refetch();
+                UpdateInstructorClassNumber(instructorEmail);
             }
         }).catch(err => console.log(err.message));
         closeApproveModal();
