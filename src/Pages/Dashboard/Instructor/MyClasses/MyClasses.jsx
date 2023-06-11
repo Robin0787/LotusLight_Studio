@@ -14,12 +14,11 @@ const MyClasses = () => {
             return res.data;
         }
     })
-    console.log(classes);
     return (
-        <section className='p-10'>
+        <section className='p-5 md:p-10'>
             {
                 classes ? (<article className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 lg:gap-10'>
-                    {classes.map(item => <SingleClass key={item._id} item={item} />)}
+                    {classes.map(item => <SingleClass key={item._id} item={item} refetch={refetch}/>)}
                 </article>)
                 :
                 <article className='flex justify-center items-center min-h-screen'>

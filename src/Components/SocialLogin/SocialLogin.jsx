@@ -19,7 +19,7 @@ const SocialLogin = () => {
                 toast.success('Successful');
                 setProcessing(false);
                 navigate(from, { replace: true });
-                StoreUser(email, { displayName, email, photoURL });
+                StoreUser(email, { displayName, email, photoURL});
             })
     }
     function continueWithGithub() {
@@ -30,7 +30,7 @@ const SocialLogin = () => {
                 toast.success('Successful');
                 setProcessing(false);
                 navigate(from, { replace: true });
-                StoreUser(email, { displayName, email, photoURL });
+                StoreUser(email, { displayName, email, photoURL});
             })
     }
     return (

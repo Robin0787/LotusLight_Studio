@@ -11,7 +11,7 @@ const UserRoute = ({children}) => {
         <ImSpinner9 size={50} className="text-blue-500 animate-spin duration-300 text-center" />
     </div>
     }
-    if(user && userRole === 'user'){
+    if(user && userRole === 'student'){
         return children
     }
     toast.success('You are not authorized');

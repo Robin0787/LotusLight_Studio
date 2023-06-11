@@ -1,47 +1,39 @@
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
-import { useNavigate } from 'react-router-dom';
-import StoreClass from '../../../../Hooks/StoreClass';
-import UploadImage from '../../../../Hooks/UploadImage';
-import { authContext } from '../../../../Provider/AuthProvider';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import UpdateClass from '../../../../../Hooks/UpdateClass';
+import { authContext } from '../../../../../Provider/AuthProvider';
+
+
+
 
 const AddClass = () => {
     const [uploadButtonText, setUploadButtonText] = useState('SVG, PNG, JPG or GIF (MAX. 800x400px)');
+    const classDetails = useLoaderData();
     const { user } = useContext(authContext);
-    const [imageUploading, setImageUploading] = useState(false);
-    const [imageURL, setImageURL] = useState('');
+    const [imageURL, setImageURL] = useState(classDetails?.image);
     const [classUploading, setClassUploading] = useState(false);
     const navigate = useNavigate();
-
     function handleAddClass(e) {
         e.preventDefault();
         setClassUploading(true);
-        if (imageURL) {
-            const form = e.target;
-            const instructorName = form.instructorName.value;
-            const instructorEmail = form.instructorEmail.value;
-            const className = form.className.value;
-            const seats = parseFloat(form.seats.value);
-            const price = parseFloat(form.price.value);
-            const classInfo = { className, image: imageURL, seats, price, instructorName, instructorEmail, status: 'pending'};
-            StoreClass(classInfo)
-            .then(data => {
-                if(data.insertedId){
-                    toast.success('Class Added');
-                    setClassUploading(false);
-                    navigate('/dashboard/my-classes');
-                    form.reset();
-                }
-            }).catch(err=>{console.log(err.message); setClassUploading(false)})
-        } else {
-            if(imageUploading){
-                toast.error('Wait! Image is uploading.');
-            }else {
-                toast.error('Please, Upload Image!');
+        const form = e.target;
+        const className = form.className.value;
+        const seats = parseFloat(form.seats.value);
+        const price = parseFloat(form.price.value);
+        const updatedInfo = { className, image: imageURL, seats, price, id: classDetails?._id};
+        
+        UpdateClass(updatedInfo)
+        .then(data => {
+            if(data.modifiedCount > 0){
                 setClassUploading(false);
+                toast.success('Class Updated');
+                navigate('/dashboard/my-classes');
+            }else {
+                toast.error('Error');
             }
-        }
+        }).catch(err => console.log(err.message));
     }
 
     // Changing the name of image input field based on image name;
@@ -78,7 +70,7 @@ const AddClass = () => {
                                 <label htmlFor="className">Class Name</label><br />
                                 <input type="text" name='className'
                                     className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
-                                    placeholder='Class Name' autoComplete="off" required />
+                                    defaultValue={classDetails?.className} autoComplete="off" required />
                             </div>
                             {/* Available seats and price input field */}
                             <div className="sm:flex justify-between items-center gap-4">
@@ -87,14 +79,14 @@ const AddClass = () => {
                                     <label htmlFor="seats">Seats</label><br />
                                     <input type="number" name='seats'
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
-                                        placeholder='Seats' autoComplete="off" required />
+                                        defaultValue={classDetails?.seats} autoComplete="off" required />
                                 </div>
                                 {/* Class price input field */}
                                 <div className='w-full md:w-1/2 space-y-1 relative'>
                                     <label htmlFor="price">Price</label><br />
                                     <input type="number" name='price'
                                         className='p-2 text-sm focus:px-3  bg-white focus:outline-0 border w-full focus:ring-1 ring-blue-200 rounded-md duration-300 placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin'
-                                        placeholder='price' autoComplete="off" required />
+                                        defaultValue={classDetails?.price} autoComplete="off" required />
                                 </div>
                             </div>
                         </article>
@@ -104,25 +96,25 @@ const AddClass = () => {
                                 <label htmlFor="instructorName">Instructor Name</label><br />
                                 <input type="text" name='instructorName'
                                     className='p-2 text-sm  border focus:outline-0 w-full rounded-md  placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin read-only:bg-blue-500 read-only:text-white read-only:cursor-not-allowed'
-                                    defaultValue={user?.displayName} readOnly />
+                                    defaultValue={classDetails?.instructorName} readOnly />
                             </div>
                             {/* Instructor Email input field */}
                             <div className='space-y-1 relative'>
                                 <label htmlFor="instructorEmail">Instructor Email</label><br />
                                 <input type="email" name='instructorEmail'
                                     className='p-2 text-sm  border focus:outline-0 w-full rounded-md  placeholder:text-xs placeholder:tracking-[2px] placeholder:font-thin read-only:bg-blue-500 read-only:text-white read-only:cursor-not-allowed'
-                                    defaultValue={user?.email} readOnly />
+                                    defaultValue={classDetails?.instructorEmail} readOnly />
                             </div>
                         </article>
                     </section>
-                    {/* Add Class Button */}
+                    {/* Update Class Button */}
                     <div className="mt-5">
                         <button
                             type="submit"
                             className='w-full py-3 flex justify-center bg-gradient-to-tr from-blue-500 to-blue-900 text-white  hover:from-blue-600 hover:to-blue-900 duration-300 rounded-md disabled:cursor-not-allowed'
                             disabled={classUploading}
                         >
-                            {classUploading ? <ImSpinner9 size={24} className="text-white animate-spin duration-300 text-center" /> : 'Add Class'}
+                            {classUploading ? <ImSpinner9 size={24} className="text-white animate-spin duration-300 text-center" /> : 'Update Class'}
                         </button>
                     </div>
                 </form>

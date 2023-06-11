@@ -44,7 +44,8 @@ const SignUp = () => {
                                     photoURL: imageURL,
                                     image: imageURL,
                                     password: '******',
-                                    confirmPassword: '******'
+                                    confirmPassword: '******',
+                                    role: 'student'
                                 }
                                 StoreUser(res.user?.email, {...userDetails});
                                 // Updating users profile details on firebase

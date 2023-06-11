@@ -1,9 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Main from "../Layouts/Main/Main";
+import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses/ManageClasses";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import DashboardHome from "../Pages/Dashboard/Home/DashboardHome";
 import AddClass from "../Pages/Dashboard/Instructor/AddClass/AddClass";
 import MyClasses from "../Pages/Dashboard/Instructor/MyClasses/MyClasses";
+import UpdateClass from "../Pages/Dashboard/Instructor/MyClasses/UpdateClass/UpdateClass";
 import Home from "../Pages/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 import Login from "../Pages/Login/Login";
@@ -51,11 +54,11 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/dashboard/manage-classes',
-                element: <AdminRoute><p>Manage Classes</p></AdminRoute>
+                element: <AdminRoute><ManageClasses /></AdminRoute>
             },
             {
                 path: '/dashboard/manage-users',
-                element: <AdminRoute><p>Manage Users</p></AdminRoute>
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: '/dashboard/add-class',
@@ -64,6 +67,11 @@ const routes = createBrowserRouter([
             {
                 path: '/dashboard/my-classes',
                 element: <InstructorRoute><MyClasses /></InstructorRoute>
+            },
+            {
+                path: '/dashboard/update-class/:id',
+                element: <InstructorRoute><UpdateClass /></InstructorRoute>,
+                loader: ({params}) => fetch(`${import.meta.env.VITE_BASE_URL}/class-details/${params.id}`)
             },
             {
                 path: '/dashboard/selected-classes',
