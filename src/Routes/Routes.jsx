@@ -8,6 +8,8 @@ import DashboardHome from "../Pages/Dashboard/Home/DashboardHome";
 import AddClass from "../Pages/Dashboard/Instructor/AddClass/AddClass";
 import MyClasses from "../Pages/Dashboard/Instructor/MyClasses/MyClasses";
 import UpdateClass from "../Pages/Dashboard/Instructor/MyClasses/UpdateClass/UpdateClass";
+import PayClass from "../Pages/Dashboard/Student/PayClass";
+import SelectedClasses from "../Pages/Dashboard/Student/SelectedClasses";
 import Home from "../Pages/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 import Login from "../Pages/Login/Login";
@@ -76,7 +78,12 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/dashboard/selected-classes',
-                element: <UserRoute><p>Selected Classes</p></UserRoute>
+                element: <UserRoute><SelectedClasses /></UserRoute>
+            },
+            {
+                path: '/dashboard/pay/:id',
+                element: <PayClass />,
+                loader: ({params}) => fetch(`${import.meta.env.VITE_BASE_URL}/selected-item/${params.id}`)
             },
             {
                 path: '/dashboard/enrolled-classes',
