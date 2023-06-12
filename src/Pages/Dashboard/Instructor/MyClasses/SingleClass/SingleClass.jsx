@@ -7,7 +7,7 @@ import DeleteInstructorClass from '../../../../../Hooks/DeleteInstructorClass';
 import DeleteClass from '../DeleteClass/DeleteClass';
 
 const SingleClass = ({ item, refetch }) => {
-    const { className, image, price, seats, status, _id, students = 0 } = item;
+    const { className, image, price, seats, status, _id, students = 0, enrolled } = item;
     const [openModal, setOpenModal] = useState(false);
     function modalHandler(id) {
         DeleteInstructorClass(id)
@@ -34,7 +34,7 @@ const SingleClass = ({ item, refetch }) => {
                 <p className='text-sm font-thin tracking-[1px] text-gray-600'>Seats: {seats}</p>
             </div>
             <div>
-                <p className='text-sm font-thin tracking-[1px] text-gray-700'>Students: {students}</p>
+                <p className='text-sm font-thin tracking-[1px] text-gray-700'>Students: {enrolled}</p>
             </div>
             <div className="flex justify-between items-center mt-5">
                 <button
