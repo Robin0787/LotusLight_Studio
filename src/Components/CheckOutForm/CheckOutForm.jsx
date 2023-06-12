@@ -3,26 +3,28 @@ import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
+import { useNavigate } from 'react-router-dom';
+import AddClassToEnroll from '../../Hooks/AddClassToEnroll';
 import DeleteClassFromSelectedClasses from '../../Hooks/DeleteClassFromSelectedClasses';
+import StorePaymentInvoice from '../../Hooks/StorePaymentInvoice';
 import UpdateEnrolledStudentsInClasses from '../../Hooks/UpdateEnrolledStudentsInClasses';
 import UpdateInstructorsStudentNumber from '../../Hooks/UpdateInstructorsStudentNumber';
 import { authContext } from '../../Provider/AuthProvider';
 
 const CheckOutForm = ({classDetails}) => {
-    const {price, instructorEmail, _id, classId} = classDetails;
+    const {price, _id, classId, className,image,instructorName,instructorEmail,userName,userEmail,} = classDetails;
     const stripe = useStripe();
     const elements = useElements();
     const [paymentLoading, setPaymentLoading] = useState(false);
     const [cardError, setCardError] = useState('');
     const {user} = useContext(authContext);
     const [clientSecret, setClientSecret] = useState('');
-    const [transactionId, setTransactionId] = useState('');
+    const navigate = useNavigate();
     useEffect(() => {
         console.log('inside form useEffect');
         axios.post(`${import.meta.env.VITE_BASE_URL}/create-payment-intent`, {price})
         .then(res => {
             setClientSecret(res.data.ClientSecret);
-            console.log(res.data);
         });
     }, [price]);
     const handleSubmit = async (event) => {
@@ -79,14 +81,23 @@ const CheckOutForm = ({classDetails}) => {
             console.log(confirmError);
             return;
         }
-        console.log(paymentIntent);
         if(paymentIntent.status === 'succeeded'){
             setPaymentLoading(false);
-            setTransactionId(paymentIntent.id);
-            const paymentInvoice = {}
+            const paymentInvoice = {
+                className,image,price,instructorName,instructorEmail,userName,
+                userEmail,classId,transactionId: paymentIntent.id
+            }
             UpdateInstructorsStudentNumber(instructorEmail);
             UpdateEnrolledStudentsInClasses(classId);
-            DeleteClassFromSelectedClasses(_id).then(data=>console.log(data))
+            DeleteClassFromSelectedClasses(_id);
+            AddClassToEnroll(classDetails);
+            StorePaymentInvoice(paymentInvoice)
+            .then(data => {
+                if(data.insertedId){
+                    toast.success('Successful');
+                    navigate('/dashboard/enrolled-classes');
+                }
+            })
         }
     };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const InstructorCard = ({ item }) => {
     const { displayName, image, email, classes = 0 } = item;
@@ -18,9 +19,10 @@ const InstructorCard = ({ item }) => {
             </div>
             <div className="flex justify-between items-center mt-5">
                 <button className='rounded-md text-sm px-4 py-1 text-gray-500 ring-1 ring-blue-400 cursor-default'>Classes: {classes}</button>
-                <button
+                <Link 
+                    to={`/instructor/${email}`}
                     className='rounded-md text-sm px-4 py-1 ring-1 ring-blue-500 text-white  bg-blue-600 hover:bg-white hover:text-blue-700 duration-300'>
-                    See Classes</button>
+                    See Classes</Link>
             </div>
         </article>
     );

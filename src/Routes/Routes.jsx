@@ -2,13 +2,16 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Main from "../Layouts/Main/Main";
 import Classes from "../Pages/Classes/Classes";
+import SpecificInstructorsClasses from "../Pages/Classes/SpecificInstructorsClasses";
 import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import DashboardHome from "../Pages/Dashboard/Home/DashboardHome";
 import AddClass from "../Pages/Dashboard/Instructor/AddClass/AddClass";
 import MyClasses from "../Pages/Dashboard/Instructor/MyClasses/MyClasses";
 import UpdateClass from "../Pages/Dashboard/Instructor/MyClasses/UpdateClass/UpdateClass";
+import EnrolledClasses from "../Pages/Dashboard/Student/EnrolledClasses/EnrolledClasses";
 import PayClass from "../Pages/Dashboard/Student/PayClass";
+import PaymentHistory from "../Pages/Dashboard/Student/PaymentHistory/PaymentHistory";
 import SelectedClasses from "../Pages/Dashboard/Student/SelectedClasses";
 import Home from "../Pages/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
@@ -32,6 +35,11 @@ const routes = createBrowserRouter([
             {
                 path: '/instructors',
                 element: <Instructors />
+            },
+            {
+                path: '/instructor/:email',
+                element: <SpecificInstructorsClasses />,
+                loader: ({params}) => fetch(`${import.meta.env.VITE_BASE_URL}/instructor-classes/${params.email}`)
             },
             {
                 path: '/classes',
@@ -87,11 +95,11 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/dashboard/enrolled-classes',
-                element: <UserRoute><p>Enrolled Classes</p></UserRoute>
+                element: <UserRoute><EnrolledClasses /></UserRoute>
             },
             {
-                path: '/dashboard/payment',
-                element: <UserRoute><p>Payment</p></UserRoute>
+                path: '/dashboard/payment-history',
+                element: <UserRoute><PaymentHistory /></UserRoute>
             },
         ]
     },
