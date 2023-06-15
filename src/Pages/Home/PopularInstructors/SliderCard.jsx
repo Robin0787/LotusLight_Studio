@@ -1,10 +1,17 @@
 import React from 'react';
 
-const SliderCard = ({item}) => {
+const SliderCard = ({item, index}) => {
+    const colors = ['#ff3811', '#40afff', '#ff4b40', '#ff26ff', '#40fff2'];
+
+    function getColor() {
+        const index = Math.floor(Math.random() * colors.length);
+        return colors[index];
+    }
+    const color = getColor();
     return (
-        <div className="carousel__cell number-slide1 cursor-pointer">
-            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3">
-                <img src={item.image} alt=""
+        <div className={`carousel__cell number-slide${index+1} cursor-pointer`} style={{backgroundColor: color}}>
+            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
+                <img src={item.image} alt="" 
                     className="lg:scale-110 h-40 sm:h-52" />
                 <div className="flex justify-between items-center gap-2">
                     <button

@@ -33,7 +33,6 @@ const PopularInstructors = () => {
         }
     });
 
-
     const [sliderRef] = useKeenSlider(
         {
             loop: true,
@@ -43,6 +42,8 @@ const PopularInstructors = () => {
         },
         [carousel]
     )
+
+
 
     return (
         <section className="my-10 lg:my-20 flex flex-col lg:flex-row justify-between items-center gap-5 py-8 lg:py-16">
@@ -66,8 +67,8 @@ const PopularInstructors = () => {
                     <div className="carousel keen-slider" ref={sliderRef}>
                         {
 
-                            PopularInstructors && PopularInstructors.map((item) => 
-                            <SliderCard item={item} key={item._id}/>)
+                            PopularInstructors && PopularInstructors.map((item, index) => 
+                            <SliderCard item={item} index={index} key={item._id}/>)
                         }
                     </div>
                 </div>
