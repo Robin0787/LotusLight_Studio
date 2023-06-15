@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import SliderCard from "./SliderCard";
-
+import img1 from "../../../assets/Instructors/instructor1.png";
+import img2 from "../../../assets/Instructors/instructor2.png";
+import img3 from "../../../assets/Instructors/instructor3.png";
+import img4 from "../../../assets/Instructors/instructor4.png";
+import img5 from "../../../assets/Instructors/instructor5.png";
+import img6 from "../../../assets/Instructors/instructor6.png";
 
 const carousel = (slider) => {
     const z = 300
@@ -25,13 +28,14 @@ const carousel = (slider) => {
 
 
 const PopularInstructors = () => {
-    const { data: PopularInstructors = [] } = useQuery({
+    const { data: popularInstructors = [] } = useQuery({
         queryKey: ['popular-instructors'],
         queryFn: async () => {
             const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/popular-instructors`);
             return res.data;
         }
     });
+
 
     const [sliderRef] = useKeenSlider(
         {
@@ -65,11 +69,94 @@ const PopularInstructors = () => {
             <article className="wrapper lg:w-1/2 ">
                 <div className="scene">
                     <div className="carousel keen-slider" ref={sliderRef}>
-                        {
-
-                            PopularInstructors && PopularInstructors.map((item, index) => 
-                            <SliderCard item={item} index={index} key={item._id}/>)
-                        }
+                        {/* {
+                            instructors && instructors.map((item, index) =>
+                                <SliderCard item={item} index={index} key={item._id} />)
+                        } */}
+                        <div className={`carousel__cell number-slide1 cursor-pointer`}>
+                            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
+                                <img src={img1} alt=""
+                                    className="lg:scale-110 h-40 sm:h-52" />
+                                <div className="flex justify-between items-center gap-2">
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {8}
+                                    </button>
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {15}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`carousel__cell number-slide2 cursor-pointer`}>
+                            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
+                                <img src={img2} alt=""
+                                    className="lg:scale-110 h-40 sm:h-52" />
+                                <div className="flex justify-between items-center gap-2">
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {7}
+                                    </button>
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {13}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`carousel__cell number-slide3 cursor-pointer`}>
+                            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
+                                <img src={img3} alt=""
+                                    className="lg:scale-110 h-40 sm:h-52" />
+                                <div className="flex justify-between items-center gap-2">
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {6}
+                                    </button>
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {12}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`carousel__cell number-slide4 cursor-pointer`}>
+                            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
+                                <img src={img4} alt=""
+                                    className="lg:scale-110 h-40 sm:h-52" />
+                                <div className="flex justify-between items-center gap-2">
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {6}
+                                    </button>
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {11}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`carousel__cell number-slide5 cursor-pointer`}>
+                            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
+                                <img src={img5} alt=""
+                                    className="lg:scale-110 h-40 sm:h-52" />
+                                <div className="flex justify-between items-center gap-2">
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {5}
+                                    </button>
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {10}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`carousel__cell number-slide6 cursor-pointer`}>
+                            <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
+                                <img src={img6} alt=""
+                                    className="lg:scale-110 h-40 sm:h-52" />
+                                <div className="flex justify-between items-center gap-2">
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {5}
+                                    </button>
+                                    <button
+                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {7}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </article>
