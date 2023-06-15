@@ -36,9 +36,9 @@ const AddClass = () => {
             }).catch(err=>{console.log(err.message); setClassUploading(false)})
         } else {
             if(imageUploading){
-                toast.error('Wait! Image is uploading.');
+                toast('Wait! Image is uploading.');
             }else {
-                toast.error('Please, Upload Image!');
+                toast('Please, Upload Image!');
                 setClassUploading(false);
             }
         }

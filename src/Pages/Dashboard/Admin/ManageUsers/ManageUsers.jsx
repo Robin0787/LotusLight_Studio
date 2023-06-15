@@ -12,7 +12,6 @@ const ManageUsers = () => {
             return res.data;
         }
     });
-    console.log(users);
     return (
         <section className='p-5 md:p-5 lg:p-10'>
             {
