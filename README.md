@@ -2,7 +2,7 @@
 
 ### Live link of the server that is used on this site -- https://lotuslight-studio-ghwpi2q3v-robin0787.vercel.app/
 
-##### An ad-tech website that offers a variety of programs for students to take. The website has an admin and teacher area where instructors may add and remove classes. After adding courses, it will appear to the admin that they have been authorized. If the admin accepts it, it will appear on the area of the course, where students can enroll. Admin is in charge of this website's users and classes. The admin may make students instructors, admin, and vice versa. Users' selected things will be seen on their dashboard's selected items route. After making the payment, the class will be added to the list of enrolled classes. When a user enrolls in a class, the instructor will have one new student in his/her profile.
+##### An E-learning website that offers a variety of photography classes for students. This website has an admin and teacher dashboard where instructors can add and remove their classes. After adding classes, it will appear to the admin that it be approved. If the admin accepts the class, then it will appear on the instructor dashboard who added that class. After that, the class will appear in the classes section. Admin is in charge of this website's users and classes. The admin can make students instructors, admin, and vice versa. Users' selected things will appear on their dashboard's selected items page. After making the payment, the class will be added to the list of enrolled classes. When a user enrolls in a class, the instructor will have one new student in his/her profile.
 
 ## For Testing
 
