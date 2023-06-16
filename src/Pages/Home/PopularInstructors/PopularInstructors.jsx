@@ -79,10 +79,10 @@ const PopularInstructors = () => {
                                     className="lg:scale-110 h-40 sm:h-52" />
                                 <div className="flex justify-between items-center gap-2">
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {8}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {8}
                                     </button>
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {15}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Students: {15}
                                     </button>
                                 </div>
                             </div>
@@ -93,10 +93,10 @@ const PopularInstructors = () => {
                                     className="lg:scale-110 h-40 sm:h-52" />
                                 <div className="flex justify-between items-center gap-2">
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {7}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {7}
                                     </button>
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {13}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Students: {13}
                                     </button>
                                 </div>
                             </div>
@@ -107,10 +107,10 @@ const PopularInstructors = () => {
                                     className="lg:scale-110 h-40 sm:h-52" />
                                 <div className="flex justify-between items-center gap-2">
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {6}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {6}
                                     </button>
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {12}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Students: {12}
                                     </button>
                                 </div>
                             </div>
@@ -121,10 +121,10 @@ const PopularInstructors = () => {
                                     className="lg:scale-110 h-40 sm:h-52" />
                                 <div className="flex justify-between items-center gap-2">
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {6}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {6}
                                     </button>
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {11}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Students: {11}
                                     </button>
                                 </div>
                             </div>
@@ -135,10 +135,10 @@ const PopularInstructors = () => {
                                     className="lg:scale-110 h-40 sm:h-52" />
                                 <div className="flex justify-between items-center gap-2">
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {5}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {5}
                                     </button>
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {10}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Students: {10}
                                     </button>
                                 </div>
                             </div>
@@ -149,10 +149,10 @@ const PopularInstructors = () => {
                                     className="lg:scale-110 h-40 sm:h-52" />
                                 <div className="flex justify-between items-center gap-2">
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {5}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Classes: {5}
                                     </button>
                                     <button
-                                        className="text-white ring-1 ring-white rounded-full text-xs px-1 md:px-3 py-[2px] md:py-1  hover:text-blue-500 hover:bg-white duration-300">Students: {7}
+                                        className="text-white ring-1 ring-white rounded-full  text-[6px] sm:text-xs px-[2px] sm:px-2 sm:py-[2px]md:px-3 md:py-1 hover:text-blue-500 hover:bg-white duration-300">Students: {7}
                                     </button>
                                 </div>
                             </div>
