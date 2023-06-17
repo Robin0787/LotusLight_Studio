@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import React from "react";
