@@ -9,7 +9,7 @@ import { authContext } from '../../../Provider/AuthProvider';
 import profile from "../../../assets/profile.png";
 
 const Navbar = () => {
-    const {user, logOutUser} = useContext(authContext);
+    const { user, logOutUser } = useContext(authContext);
     const navItems = <>
         <NavLink to={'/'}
             className={({ isActive }) => isActive ?
@@ -48,7 +48,7 @@ const Navbar = () => {
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-black items-start rounded-box w-52 z-10 gap-3">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-5 shadow bg-white text-black items-start rounded-box w-52 z-10 gap-4">
                             {navItems}
                         </ul>
                     </div>
@@ -81,14 +81,12 @@ const Navbar = () => {
                                             <img src={user.photoURL || profile} />
                                         </div>
                                     </label>
-                                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-white text-black rounded-box w-52 z-10">
-                                        <li>
-                                            <a className="justify-between">
-                                                <span>Profile</span>
-                                                <FaRegUserCircle size={20} />
-                                            </a>
-                                        </li>
-                                        <li onClick={() => {logOutUser()}}><a>Log Out</a></li>
+                                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 gap-2 shadow bg-white text-black rounded-box w-52 z-10">
+                                            <Link to={`/profile`} className='flex justify-between px-3 py-1 items-center'>
+                                                    <span>Profile</span>
+                                                    <FaRegUserCircle size={20} />
+                                            </Link>
+                                        <li onClick={() => { logOutUser() }}><a>Log Out</a></li>
                                     </ul>
                                 </div>
                             </div>

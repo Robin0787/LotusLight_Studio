@@ -17,6 +17,7 @@ import Home from "../Pages/Home/Home";
 import Instructors from "../Pages/Instructors/Instructors";
 import Login from "../Pages/Login/Login";
 import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
+import Profile from "../Pages/Profile/Profile";
 import SignUp from "../Pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
@@ -44,6 +45,10 @@ const routes = createBrowserRouter([
             {
                 path: '/classes',
                 element: <Classes />
+            },
+            {
+                path: '/profile',
+                element: <PrivateRoute><Profile /></PrivateRoute>
             }
         ]
     },

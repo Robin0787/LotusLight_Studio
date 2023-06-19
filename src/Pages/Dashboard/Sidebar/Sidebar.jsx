@@ -105,7 +105,7 @@ const Sidebar = () => {
                         <span className='mx-4 font-medium'>Home</span>
                     </NavLink>
                     <NavLink
-                        to='/dashboard/profile'
+                        to={`/profile`}
                         className={({ isActive }) =>
                             `flex items-center px-4 py-2 mt-5  transition-colors duration-200 transform hover:text-white  hover:bg-blue-800 rounded-lg ${isActive ? 'bg-indigo-900  text-white' : 'text-gray-200'
                             }`
