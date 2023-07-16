@@ -67,6 +67,7 @@ const SignUp = () => {
     const handleImageChange = image => {
         setUploadButtonText(image.name);
     }
+    
     // listening password on every change
     function handlePassChange(e) {
         const pass = e.target.value;

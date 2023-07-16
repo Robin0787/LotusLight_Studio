@@ -51,7 +51,7 @@ const PopularInstructors = () => {
 
 
     return (
-        <section className="my-10 lg:my-20 flex flex-col lg:flex-row justify-between items-center gap-5 py-8 lg:py-16">
+        <section className="my-10 lg:my-20 flex flex-col lg:flex-row justify-between items-center gap-5 py-8 lg:py-28">
             <article className='text-center space-y-3 md:space-y-5 lg:w-1/2 p-4'>
                 <h2
                     className="text-2xl md:text-4xl lg:text-5xl leading-snug 
@@ -70,11 +70,7 @@ const PopularInstructors = () => {
             <article className="wrapper lg:w-1/2 ">
                 <div className="scene">
                     <div className="carousel keen-slider" ref={sliderRef}>
-                        {/* {
-                            instructors && instructors.map((item, index) =>
-                                <SliderCard item={item} index={index} key={item._id} />)
-                        } */}
-                        <div className={`carousel__cell number-slide1 cursor-pointer`}>
+                        <div className={`carousel__cell number-slide1 cursor-grab rounded-md border-0 shadow-lg shadow-blue-500`}>
                             <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
                                 <img src={img1} alt=""
                                     className="lg:scale-110 h-40 sm:h-52" />
@@ -88,7 +84,7 @@ const PopularInstructors = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={`carousel__cell number-slide2 cursor-pointer`}>
+                        <div className={`carousel__cell number-slide2 cursor-grab rounded-md border-0 shadow-lg shadow-orange-500`}>
                             <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
                                 <img src={img2} alt=""
                                     className="lg:scale-110 h-40 sm:h-52" />
@@ -102,7 +98,7 @@ const PopularInstructors = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={`carousel__cell number-slide3 cursor-pointer`}>
+                        <div className={`carousel__cell number-slide3 cursor-grab rounded-md border-0 shadow-lg shadow-purple-500`}>
                             <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
                                 <img src={img3} alt=""
                                     className="lg:scale-110 h-40 sm:h-52" />
@@ -116,7 +112,7 @@ const PopularInstructors = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={`carousel__cell number-slide4 cursor-pointer`}>
+                        <div className={`carousel__cell number-slide4 cursor-grab rounded-md border-0 shadow-lg shadow-sky-500`}>
                             <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
                                 <img src={img4} alt=""
                                     className="lg:scale-110 h-40 sm:h-52" />
@@ -130,7 +126,7 @@ const PopularInstructors = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={`carousel__cell number-slide5 cursor-pointer`}>
+                        <div className={`carousel__cell number-slide5 cursor-grab rounded-md border-0 shadow-lg shadow-pink-500`}>
                             <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
                                 <img src={img5} alt=""
                                     className="lg:scale-110 h-40 sm:h-52" />
@@ -144,7 +140,7 @@ const PopularInstructors = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={`carousel__cell number-slide6 cursor-pointer`}>
+                        <div className={`carousel__cell number-slide6 cursor-grab rounded-md border-0 shadow-lg shadow-indigo-500`}>
                             <div className="flex flex-col justify-between h-full p-3 gap-1 md:gap-3" >
                                 <img src={img6} alt=""
                                     className="lg:scale-110 h-40 sm:h-52" />

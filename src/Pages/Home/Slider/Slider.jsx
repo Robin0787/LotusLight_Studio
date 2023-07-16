@@ -1,6 +1,6 @@
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from "keen-slider/react";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import img1 from "../../../assets/Home/Slider/img1.png";
 import img2 from "../../../assets/Home/Slider/img2.png";
