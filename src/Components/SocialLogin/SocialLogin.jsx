@@ -3,6 +3,8 @@ import { toast } from 'react-hot-toast';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import StoreUser from '../../Hooks/StoreUser';
+import getToken from '../../Hooks/authentication/getToken';
+import storeUserToken from '../../Hooks/authentication/storeUserToken';
 import { authContext } from '../../Provider/AuthProvider';
 
 const SocialLogin = () => {
@@ -18,6 +20,10 @@ const SocialLogin = () => {
                 const { displayName, email, photoURL } = res.user;
                 toast.success('Successful');
                 setProcessing(false);
+                getToken(email)
+                .then(userToken => {
+                    storeUserToken(userToken);
+                })
                 navigate(from, { replace: true });
                 StoreUser(email, { displayName, email, photoURL});
             })
@@ -29,10 +35,15 @@ const SocialLogin = () => {
                 const { displayName, email, photoURL } = res.user;
                 toast.success('Successful');
                 setProcessing(false);
+                getToken(email)
+                .then(userToken => {
+                    storeUserToken(userToken);
+                })
                 navigate(from, { replace: true });
                 StoreUser(email, { displayName, email, photoURL});
             })
     }
+    
     return (
         <>
             <button

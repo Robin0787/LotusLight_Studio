@@ -9,6 +9,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import StoreUser from "../../Hooks/StoreUser";
 import UploadImage from "../../Hooks/UploadImage";
+import getToken from "../../Hooks/authentication/getToken";
+import storeUserToken from "../../Hooks/authentication/storeUserToken";
 import { authContext } from "../../Provider/AuthProvider";
 import animation from "../../assets/signUpAnimation.json";
 
@@ -18,7 +20,7 @@ const SignUp = () => {
     const [isPassOk, setIsPassOk] = useState(false);
     const [showPass, setShowPass] = useState(false);
     const [uploadButtonText, setUploadButtonText] = useState('Upload Image');
-    const { register, handleSubmit, formState: { errors }, reset, setError, clearErrors } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
     const { createUser, processing, setProcessing } = useContext(authContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -36,6 +38,11 @@ const SignUp = () => {
                                 toast.success('SignUp Successful');
                                 setProcessing(false);
                                 reset();
+                                // Getting the token for user and saving it to the localStorage;
+                                getToken(res.email)
+                                .then(userToken => {
+                                    storeUserToken(userToken);
+                                });
                                 navigate(from, {replace: true});
                                 // Storing the users information to database
                                 const userDetails = {
@@ -50,7 +57,7 @@ const SignUp = () => {
                                 StoreUser(res.user?.email, {...userDetails});
                                 // Updating users profile details on firebase
                                 updateProfile(res.user, { displayName: `${data.firstName} ${data.lastName}`, photoURL: imageURL });
-                            }).catch(err => { toast.error('Something Wrong!'); console.log(err.message); setProcessing(false); })
+                            }).catch(err => { toast.error('Something Wrong!'); console.log(err.message); setProcessing(false); });
                     })
             }
             else {
@@ -67,7 +74,6 @@ const SignUp = () => {
     const handleImageChange = image => {
         setUploadButtonText(image.name);
     }
-    
     // listening password on every change
     function handlePassChange(e) {
         const pass = e.target.value;

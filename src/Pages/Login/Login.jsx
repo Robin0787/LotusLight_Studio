@@ -6,6 +6,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import getToken from "../../Hooks/authentication/getToken";
+import storeUserToken from "../../Hooks/authentication/storeUserToken";
 import { authContext } from "../../Provider/AuthProvider";
 import animation from "../../assets/signUpAnimation.json";
 
@@ -24,6 +26,10 @@ const Login = () => {
         .then(res => {
             setProcessing(false);
             reset();
+            getToken(res.email)
+            .then(userToken => {
+                storeUserToken(userToken);
+            });
             navigate(from, {replace: true});
         })
         .catch(err => {toast.error(err.message.slice(22, -2).replace(/-/ig, ' ')); console.log(err.message); setProcessing(false)});

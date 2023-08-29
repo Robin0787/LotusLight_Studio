@@ -1,6 +1,7 @@
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { GetUserRole } from "../Hooks/GetUserRole";
+import removeUserToken from "../Hooks/authentication/removeUserToken";
 import app from '../firebase/firebase.init';
 export const authContext = createContext(null);
 
@@ -23,6 +24,7 @@ const AuthProvider = ({children}) => {
     }
 
     const logOutUser = () => {
+        removeUserToken();
         return signOut(auth);
     }
 
