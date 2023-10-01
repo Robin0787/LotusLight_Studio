@@ -15,3 +15,21 @@
     margin: 0;
   }
 }
+
+/* CSS for the scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+  transition-duration: 0.3s;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(59 130 246);
+  border-radius: 10px;
+}

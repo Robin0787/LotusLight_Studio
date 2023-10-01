@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import LoginInfo from "../../Components/LoginInfo/LoginInfo";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import getToken from "../../Hooks/authentication/getToken";
 import storeUserToken from "../../Hooks/authentication/storeUserToken";
@@ -116,6 +117,7 @@ const Login = () => {
                     </div>
                 </form>
             </section>
+            <LoginInfo />
         </section>
     );
 };
